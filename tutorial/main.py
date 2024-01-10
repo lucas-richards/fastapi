@@ -1,6 +1,7 @@
 from enum import Enum
-from fastapi import FastAPI
+from fastapi import FastAPI, Query, Path, Body
 from pydantic import BaseModel
+from typing import Annotated
 
 
 class Item(BaseModel):
@@ -10,6 +11,9 @@ class Item(BaseModel):
     price: float # Required field
     tax: float | None = None # Optional field
 
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
 
 
 app = FastAPI()
@@ -24,6 +28,42 @@ fake_items_db = [
     {"item_name": "Bar"}, 
     {"item_name": "Baz"}
 ]
+
+@app.put("/items/{item_id}")
+async def update_item(
+    item_id: int, item: Item, user: User, importance: Annotated[int, Body()]
+):
+    results = {"item_id": item_id, "item": item, "user": user, "importance": importance}
+    return results
+
+@app.put("/items/{item_id}")
+async def update_item(
+    item_id: Annotated[int, Path(title="The ID of the item to get", ge=0, le=1000)],
+    q: str | None = None,
+    item: Item | None = None,
+):
+    results = {"item_id": item_id}
+    if q:
+        results.update({"q": q})
+    if item:
+        results.update({"item": item})
+    return results
+
+@app.get("/items/")
+async def read_items(q: Annotated[str | None, Query(max_length=50)] = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+
+# Request body + path + query parameters
+
+# The function parameters will be recognized as follows:
+
+# If the parameter is also declared in the path, it will be used as a path parameter.
+# If the parameter is of a singular type (like int, float, str, bool, etc) it will be interpreted as a query parameter.
+# If the parameter is declared to be of the type of a Pydantic model, it will be interpreted as a request body.
+
 
 
 @app.get("/items/{item_id}")
