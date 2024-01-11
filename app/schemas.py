@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import datetime
 
 
 class ItemBase(BaseModel):
@@ -32,6 +33,7 @@ class User(UserBase):
     id: int
     is_active: bool
     items: list[Item] = []
+    created_at: datetime.datetime
 
     class Config:
         orm_mode = True

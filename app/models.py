@@ -1,5 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
+import datetime
 
 from database import Base
 
@@ -11,6 +12,8 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    # date and time created by default
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     items = relationship("Item", back_populates="owner")
 
