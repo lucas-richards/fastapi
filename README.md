@@ -63,3 +63,9 @@ You will see the alternative automatic documentation (provided by ReDoc):
  - uvicorn - for the server that loads and serves your application.
  - orjson - Required if you want to use ORJSONResponse.
 You can install all of these with pip install "fastapi[all]".
+
+## Models
+
+ - SQLAlchemy uses the term "model" to refer to these classes and instances that interact with the database.
+
+ - But Pydantic also uses the term "model" to refer to something different, the data validation, conversion, and documentation classes and instances.
