@@ -36,4 +36,4 @@ class User(UserBase):
     created_at: datetime.datetime
 
     class Config:
-        orm_mode = True # renamed to from_attributes?
+        from_attributes = True # renamed from orm_mode?
