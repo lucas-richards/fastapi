@@ -69,3 +69,5 @@ You can install all of these with pip install "fastapi[all]".
  - SQLAlchemy uses the term "model" to refer to these classes and instances that interact with the database.
 
  - But Pydantic also uses the term "model" to refer to something different, the data validation, conversion, and documentation classes and instances.
+
+## Docker
