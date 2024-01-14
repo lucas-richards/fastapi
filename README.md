@@ -71,3 +71,5 @@ You can install all of these with pip install "fastapi[all]".
  - But Pydantic also uses the term "model" to refer to something different, the data validation, conversion, and documentation classes and instances.
 
 ## Docker
+
+Containerize a Python application (https://docs.docker.com/language/python/containerize/)
