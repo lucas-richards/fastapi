@@ -73,3 +73,5 @@ You can install all of these with pip install "fastapi[all]".
 ## Docker
 
 Containerize a Python application (https://docs.docker.com/language/python/containerize/)
+
+$ docker init
